@@ -8,6 +8,7 @@ This repository contains the npm source tree used in the iOS `node22` package bu
 - `ios/bin/npm22`: iOS wrapper for npm CLI
 - `ios/bin/npx22`: iOS wrapper for npx CLI
 - `patches/`: notes/patch artifacts for iOS packaging
+- `deb/`: prebuilt iOS package artifacts
 
 ## Upstream
 
@@ -36,4 +37,16 @@ Expected npm version:
 
 ```text
 10.9.0
+```
+
+## Prebuilt Debian package
+
+This repo includes a ready-to-install package:
+
+- `deb/npm22-ios_10.9.0-2_iphoneos-arm.deb`
+
+Install on device:
+
+```sh
+dpkg -i /var/root/npm22-ios_10.9.0-2_iphoneos-arm.deb
 ```
