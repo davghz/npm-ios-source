@@ -1,0 +1,12 @@
+Package: npm22-ios
+Version: 10.9.0-2
+Section: utils
+Priority: optional
+Architecture: iphoneos-arm
+Maintainer: davgz
+Depends: nodejs22-ios (>= 22.12.0-15), firmware (>= 13.0)
+Replaces: nodejs22-ios (<= 22.12.0-999)
+Provides: npm22
+Description: npm 10.9.0 and npx for iOS arm64 (for node22)
+ Installs npm tree at /usr/local/lib/node22/node_modules/npm and wrappers
+ /usr/local/bin/npm22 and /usr/local/bin/npx22.
