@@ -19,7 +19,7 @@ Install from the download folder with APT to resolve dependencies:
 sudo apt install ./npm22-ios_12.2.2-1+rootless_iphoneos-arm64.deb
 ```
 
-Install [Node.js 26.13.1 for rootless iOS](https://github.com/davghz/node22-ios-source/releases/tag/v26.13.1-1-rootless) first. npm and npx use that native runtime.
+Install the [latest Node.js package for rootless iOS](https://github.com/davghz/node22-ios-source/releases/latest) first. npm and npx use that native runtime.
 <!-- /latest-rootless-download -->
 
 ```sh
