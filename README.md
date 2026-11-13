@@ -4,6 +4,24 @@ This branch packages **npm 12.2.2** and npx for the native **Node.js 26.13.1**
 port on rootless jailbroken iOS 15 or later. The complete npm release is
 verified against its registry SHA-512 integrity value before packaging.
 
+
+<!-- latest-rootless-download -->
+## Latest download
+
+| Release | Rootless package | SHA256 |
+| --- | --- | --- |
+| [npm 12.2.2](https://github.com/davghz/npm-ios-source/releases/tag/v12.2.2-1-rootless) | [Download .deb](https://github.com/davghz/npm-ios-source/releases/download/v12.2.2-1-rootless/npm22-ios_12.2.2-1%2Brootless_iphoneos-arm64.deb) | [Checksum](https://github.com/davghz/npm-ios-source/releases/download/v12.2.2-1-rootless/npm22-ios_12.2.2-1%2Brootless_iphoneos-arm64.deb.sha256) |
+
+Requires **jailbroken rootless iOS 15 or later** (`iphoneos-arm64`).
+Install from the download folder with APT to resolve dependencies:
+
+```sh
+sudo apt install ./npm22-ios_12.2.2-1+rootless_iphoneos-arm64.deb
+```
+
+Install [Node.js 26.13.1 for rootless iOS](https://github.com/davghz/node22-ios-source/releases/tag/v26.13.1-1-rootless) first. npm and npx use that native runtime.
+<!-- /latest-rootless-download -->
+
 ```sh
 python3 ios/build-latest-rootless-deb.py
 ```
