@@ -1,4 +1,4 @@
-# npm-ios-source
+# npm for iOS
 
 npm 10.9.0 packaged for jailbroken iOS, wrapping the Node.js v22 binary.
 
