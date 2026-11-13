@@ -1,5 +1,7 @@
 # npm-ios-source
 
+For **rootless iOS 15 or later**, use the [rootless package and instructions](ios/ROOTLESS.md).
+
 npm 10.9.0 packaged for jailbroken iOS, wrapping the Node.js v22 binary.
 
 ## What it is
