@@ -13,16 +13,18 @@ class Version extends BaseCommand {
     'json',
     'preid',
     'sign-git-tag',
+    'save',
     'workspace',
     'workspaces',
     'workspaces-update',
     'include-workspace-root',
+    'ignore-scripts',
   ]
 
   static workspaces = true
   static ignoreImplicitWorkspace = false
+  static skipConfigValidation = true
 
-  /* eslint-disable-next-line max-len */
   static usage = ['[<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]']
 
   static async completion (opts) {

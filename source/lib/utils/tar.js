@@ -1,15 +1,16 @@
 const tar = require('tar')
 const ssri = require('ssri')
-const { log, output } = require('proc-log')
+const { log, output, META } = require('proc-log')
 const formatBytes = require('./format-bytes.js')
 const localeCompare = require('@isaacs/string-locale-compare')('en', {
   sensitivity: 'case',
   numeric: true,
 })
 
-const logTar = (tarball, { unicode = false, json, key } = {}) => {
+const logTar = (tarball, { unicode = false, json, key, redact } = {}) => {
   if (json) {
-    output.buffer(key == null ? tarball : { [key]: tarball })
+    const meta = redact === false ? { [META]: true, redact: false } : undefined
+    output.buffer({ [key]: tarball }, meta)
     return
   }
   log.notice('')
@@ -36,7 +37,6 @@ const logTar = (tarball, { unicode = false, json, key } = {}) => {
   log.notice('', `package size: ${formatBytes(tarball.size)}`)
   log.notice('', `unpacked size: ${formatBytes(tarball.unpackedSize)}`)
   log.notice('', `shasum: ${tarball.shasum}`)
-  /* eslint-disable-next-line max-len */
   log.notice('', `integrity: ${tarball.integrity.toString().slice(0, 20)}[...]${tarball.integrity.toString().slice(80)}`)
   if (tarball.bundled.length) {
     log.notice('', `bundled deps: ${tarball.bundled.length}`)

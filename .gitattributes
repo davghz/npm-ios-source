@@ -1,0 +1,2 @@
+# Preserve the published upstream source, including Windows script line endings.
+source/** -text -whitespace

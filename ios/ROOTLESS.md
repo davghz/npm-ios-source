@@ -1,24 +1,35 @@
-# Rootless iOS 15
+# npm 12 on rootless iOS 15
 
-Build npm **10.9.0** for the rootless Node.js 22 port:
+`ios/build-latest-rootless-deb.py` pins npm **12.2.2** and verifies the downloaded
+archive against the reviewed SHA-512 integrity value in `ios/npm-release.json`
+before extraction. It
+packages the complete upstream release, including all bundled dependencies.
+
+Build with Python 3.12 or later and `dpkg-deb`:
 
 ```sh
-bash ios/build-rootless-deb.sh
+python3 ios/build-latest-rootless-deb.py
 ```
 
-Output: `deb/npm22-ios_10.9.0-3+rootless_iphoneos-arm64.deb`.
-Install the rootless `nodejs22-ios` package first.
+The package is `npm22-ios` version `12.2.2-1+rootless`, architecture
+`iphoneos-arm64`. It requires the native rootless `nodejs22-ios` runtime at
+version 26.13.1 or later. This is an in-place upgrade of the historical
+package identifier; `npm`, `npx`, `npm22`, and `npx22` all run the new release.
 
-The builder uses the complete `10.9.0-2` release package, since the Git
-source tree excludes bundled `node_modules`. It installs the npm tree under
-`/var/jb/usr/lib/node22/node_modules/npm`, with `npm`, `npx`, `npm22`, and
-`npx22` in `/var/jb/usr/bin`. The wrappers invoke the stable `node` wrapper
-and use `/var/jb/bin/sh` for lifecycle scripts.
+The wrappers use the runtime's `/var/jb/usr/bin/node` launcher and
+`/var/jb/bin/sh` for lifecycle scripts. For non-root users, global installs
+default to `$HOME/.local` unless a prefix environment variable is supplied.
+Root global installs default to `/var/jb/usr`, independent of the native Node
+executable's private location. A profile script adds the mobile `bin`
+directory to new shells.
 
-For non-root users, global installs default to `$HOME/.local` unless a prefix
-environment variable is explicitly supplied. A profile script adds its `bin`
-directory to PATH in new shells.
+The older `ios/build-rootless-deb.sh` builds the npm 10.9.0 rollback version.
 
-Validated as `mobile` on rootless iOS 15.6.1: npm/npx versions, registry ping,
-offline installation of a local package including its lifecycle script,
-execution of its global command, and uninstall.
+On-device validation on iPhone X, iOS 15.6.1, with Node.js 26.13.1 passed
+`npm ping`, global installation into the mobile prefix, a scoped lifecycle
+script approval, and execution of the installed command. Run
+`sh ios/smoke-latest-rootless.sh` on the device to repeat this check.
+
+npm 12 requires explicit approval for dependency lifecycle scripts. The smoke
+test approves only its exact local fixture tarball with `--allow-scripts`;
+the package preserves npm's default approval policy.
